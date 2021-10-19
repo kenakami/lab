@@ -28,6 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'kenakami.xyz',
+    'board.kenakami.xyz',
     '13.57.40.145',
     'ec2-13-57-40-145.us-west-1.compute.amazonaws.com',
     'localhost',
