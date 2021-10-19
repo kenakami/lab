@@ -1,0 +1,12 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Board</h1>
+	<p>Welcome to Board, a simple board.
+  <h2>Dynamic content</h2>
+  <ul>
+    <li><strong>Threads:</strong> {{ num_threads }}</li>
+    <li><strong>Posts:</strong> {{ num_posts }}</li>
+    <li><strong>Images:</strong> {{ num_images }}</li>
+  </ul>
+{% endblock %}

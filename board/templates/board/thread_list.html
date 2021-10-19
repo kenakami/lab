@@ -1,0 +1,44 @@
+{% extends "base_generic.html" %}
+
+{% load custom %}
+
+{% block content %}
+  <h1>Feed</h1>
+  {% if thread_list %}
+    {% for thread in thread_list %}
+      <div class='card'>
+        <div class='card-body'>
+          {% if thread.subject %}
+            <b>{{ thread.subject }}</b>
+            <br/>
+          {% endif %}
+          <b>{% firstof thread.post_set.first.name 'Anonymous' %}</b> {{ thread.post_set.first.time }} No.{{ thread.post_set.first.id }}
+          <br/>
+          {{ thread.post_set.first.comment }}
+          <hr>
+          <a href="{{ thread.get_absolute_url }}">{{ thread.post_set.all|length|add:"-1" }} repl{{ thread.post_set.all|length|add:"-1"|pluralize:"y,ies" }}</a>
+        </div>
+      </div>
+      <ul>
+      {% if thread.post_set.all|length > 3 %}
+        <div class='card'>
+          <div class='card-body'>...</div>
+        </div>
+      {% endif %}
+      {% for post in thread.post_set.all|sliceLast:"3" %}
+        <div class='card'>
+          <div class='card-body'>
+            <b>{% firstof post.name 'Anonymous' %}</b> {{ post.time }} No.{{ post.id }}
+            <br/>
+            {{ post.comment }}
+          </div>
+        </div>
+      {% endfor %}
+      </ul>
+      <hr/>
+    {% endfor %}
+  {% else %}
+    <p>There are no threads.</p>
+  {% endif %}
+{% endblock %}
+
