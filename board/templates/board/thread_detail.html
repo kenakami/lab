@@ -6,7 +6,7 @@
     {% for post in thread.post_set.all %}
       <div class='card'>
         <div class='card-body'>
-          {% if forloop.counter == 1 %} 
+          {% if forloop.counter == 1 and thread.subject %} 
             <b>{{ thread.subject }}</b>
             <br/>
           {% endif %}
