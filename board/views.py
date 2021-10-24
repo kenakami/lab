@@ -51,7 +51,7 @@ def create_thread(request):
             thread = Thread(subject=form.cleaned_data['subject'], last_updated=datetime.datetime.now())
             post = Post(thread=thread, name=form.cleaned_data['name'], comment=form.cleaned_data['comment'])
             thread.id = post.id
-            
+
             thread.save()
             post.save()
 
