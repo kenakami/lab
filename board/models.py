@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from uuid import uuid4
 
 # Create your models here.
 
@@ -21,10 +22,16 @@ class Thread(models.Model):
         return f'{self.id} - {self.subject}'
 
 class Post(models.Model):
+    def rename(instance, filename):
+        ext = filename.split('.')[-1]
+        filename = '{}.{}'.format(uuid4().hex, ext)
+        return filename
+
     thread = models.ForeignKey('Thread', on_delete=models.SET_NULL, null=True)
     time = models.DateTimeField('time', auto_now_add=True)
     comment = models.TextField()
-    name = models.TextField(blank=True)
+    name = models.TextField(blank=True, null=True)
+    image = models.ImageField(upload_to=rename, null=True)
     
 
     class Meta:

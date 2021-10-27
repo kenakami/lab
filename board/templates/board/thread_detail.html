@@ -12,6 +12,9 @@
           {% endif %}
           <b>{% firstof post.name 'Anonymous' %}</b> {{ post.time }} No.{{ post.id }}
           <br/>
+          {% if post.image %}
+            <img src="{{ post.image.url }}" style="max-height: 256px; max-width: 256px; margin-right: 8px" align="left"/>
+          {% endif %}
           {{ post.comment }}
         </div>
       </div>

@@ -4,12 +4,15 @@ class CreateThreadForm(forms.Form):
     name = forms.CharField(required=False)
     subject = forms.CharField(required=False)
     comment = forms.CharField(widget=forms.Textarea, required=True)
+
     # TODO include image and location
+    image = forms.ImageField()
 
     def clean(self):
         name = self.cleaned_data['name']
         subject = self.cleaned_data['subject']
         comment = self.cleaned_data['comment']
+        image = self.cleaned_data['image']
 
         return self.cleaned_data
 

@@ -40,7 +40,7 @@ def create_thread(request):
     if request.method == 'POST':
 
         # Create a form instance and populate it with data from the request (binding):
-        form = CreateThreadForm(request.POST)
+        form = CreateThreadForm(request.POST, request.FILES)
 
         # Check if the form is valid:
         if form.is_valid():
@@ -49,7 +49,9 @@ def create_thread(request):
             # book_instance.save()
 
             thread = Thread(subject=form.cleaned_data['subject'], last_updated=datetime.datetime.now())
-            post = Post(thread=thread, name=form.cleaned_data['name'], comment=form.cleaned_data['comment'])
+            post = Post(thread=thread, name=form.cleaned_data['name'],
+                    comment=form.cleaned_data['comment'],
+                    image=form.cleaned_data['image'])
             thread.id = Post.objects.count() + 1
 
             thread.save()
