@@ -1,4 +1,5 @@
 {% extends "base_generic.html" %}
+{% load static %}
 
 {% block content %}
   <h1>Board</h1>
@@ -9,4 +10,5 @@
     <li><strong>Posts:</strong> {{ num_posts }}</li>
     <li><strong>Images:</strong> {{ num_images }}</li>
   </ul>
+  <img src="{% static 'walnut.jpg' %}" style="max-height: 50%; max-width: 50%">
 {% endblock %}
