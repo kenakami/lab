@@ -19,7 +19,7 @@ class CreateThreadForm(forms.Form):
 class ReplyForm(forms.Form):
     name = forms.CharField(required=False)
     comment = forms.CharField(widget=forms.Textarea, required=True)
-    image = forms.ImageField(required=True)
+    image = forms.ImageField(required=False)
 
     def clean(self):
         name = self.cleaned_data['name']
