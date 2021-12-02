@@ -28,6 +28,7 @@ class Post(models.Model):
         return filename
 
     thread = models.ForeignKey('Thread', on_delete=models.SET_NULL, null=True)
+    original = models.BooleanField(default=False)
     time = models.DateTimeField('time', auto_now_add=True)
     comment = models.TextField()
     name = models.TextField(blank=True, null=True)

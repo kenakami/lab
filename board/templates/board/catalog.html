@@ -6,19 +6,7 @@
   <h1>Catalog</h1>
   {% if thread_list %}
     {% for thread in thread_list %}
-      <div class='card'>
-        <div class='card-body'>
-          {% if thread.subject %}
-            <b>{{ thread.subject }}</b>
-            <br/>
-          {% endif %}
-          <b>{% firstof thread.post_set.first.name 'Anonymous' %}</b> {{ thread.post_set.first.time }} No.{{ thread.post_set.first.id }}
-          <br/>
-          {{ thread.post_set.first.comment }}
-          <hr>
-          <a href="{{ thread.get_absolute_url }}">{{ thread.post_set.all|length|add:"-1" }} repl{{ thread.post_set.all|length|add:"-1"|pluralize:"y,ies" }}</a>
-        </div>
-      </div>
+      {% include 'board/card_catalog.html' with thread=thread post=thread.post_set.first %}
       <hr/>
     {% endfor %}
   {% else %}

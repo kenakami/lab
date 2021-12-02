@@ -4,11 +4,18 @@ from django.views import generic
 from .models import Thread, Post
 # Create your views here.
 
+import boto3
+import os
+
 def index(request):
+    s3 = boto3.resource('s3')
+    bucket = s3.Bucket(os.getenv('AWS_STORAGE_BUCKET_NAME'))
+    num_images = sum(1 for _ in bucket.objects.filter(Prefix='media/'))
+
     context = {
         'num_threads': Thread.objects.count(),
         'num_posts': Post.objects.count(),
-        'num_images': 0,
+        'num_images': num_images,
     }
 
     return render(request, 'index.html', context=context)
@@ -49,7 +56,7 @@ def create_thread(request):
             # book_instance.save()
 
             thread = Thread(subject=form.cleaned_data['subject'], last_updated=datetime.datetime.now())
-            post = Post(thread=thread, name=form.cleaned_data['name'],
+            post = Post(thread=thread, name=form.cleaned_data['name'], original=True,
                     comment=form.cleaned_data['comment'],
                     image=form.cleaned_data['image'])
             thread.id = Post.objects.count() + 1
@@ -76,10 +83,12 @@ def create_thread(request):
 def reply(request, pk):
     thread = get_object_or_404(Thread, pk=pk)
     if request.method == 'POST':
-        form = ReplyForm(request.POST)
+        form = ReplyForm(request.POST, request.FILES)
         if form.is_valid():
             thread.last_updated=datetime.datetime.now()
-            post = Post(thread=thread, name=form.cleaned_data['name'], comment=form.cleaned_data['comment'])
+            post = Post(thread=thread, name=form.cleaned_data['name'],
+                        comment=form.cleaned_data['comment'],
+                        image=form.cleaned_data['image'])
             
             thread.save()
             post.save()

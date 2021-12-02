@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'board',
     'storages',
 ]
+if os.getenv('DJANGO_DEBUG') == 'True':
+    INSTALLED_APPS += ['django.contrib.admin']
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -139,4 +141,6 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 AWS_LOCATION = 'static'
+
+DEFAULT_FILE_STORAGE = 'lab.storage_backends.MediaStorage'
 

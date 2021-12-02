@@ -4,20 +4,7 @@
   {% if thread %}
     <h1>Detail</h1>
     {% for post in thread.post_set.all %}
-      <div class='card'>
-        <div class='card-body'>
-          {% if forloop.counter == 1 and thread.subject %} 
-            <b>{{ thread.subject }}</b>
-            <br/>
-          {% endif %}
-          <b>{% firstof post.name 'Anonymous' %}</b> {{ post.time }} No.{{ post.id }}
-          <br/>
-          {% if post.image %}
-            <img src="{{ post.image.url }}" style="max-height: 256px; max-width: 256px; margin-right: 8px" align="left"/>
-          {% endif %}
-          {{ post.comment }}
-        </div>
-      </div>
+      {% include 'board/card.html' with thread=thread post=post %}
     {% endfor %}
       <div class='card'>
         <div class='card-body'>

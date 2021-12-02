@@ -6,7 +6,7 @@ class CreateThreadForm(forms.Form):
     comment = forms.CharField(widget=forms.Textarea, required=True)
 
     # TODO include image and location
-    image = forms.ImageField()
+    image = forms.ImageField(required=True)
 
     def clean(self):
         name = self.cleaned_data['name']
@@ -19,10 +19,12 @@ class CreateThreadForm(forms.Form):
 class ReplyForm(forms.Form):
     name = forms.CharField(required=False)
     comment = forms.CharField(widget=forms.Textarea, required=True)
+    image = forms.ImageField(required=True)
 
     def clean(self):
         name = self.cleaned_data['name']
         comment = self.cleaned_data['comment']
+        image = self.cleaned_data['image']
 
         return self.cleaned_data
 
