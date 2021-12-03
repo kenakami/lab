@@ -1,18 +1,18 @@
-<div class='card'>
+{% load thumbnail %}
+<div class='card' style='max-height: 24em; overflow: hidden'>
+  {% if post.image %}
+    {% thumbnail post.image "256x256" as im %}
+    <a href="{{ thread.get_absolute_url }}">
+      <img class="card-img-top" src="{{ im.url }}"/>
+    </a>
+    {% endthumbnail %}
+  {% endif %}
   <div class='card-body'>
+    <p>{{ thread.post_set.all|length|add:"-1" }} repl{{ thread.post_set.all|length|add:"-1"|pluralize:"y,ies" }}</p>
     {% if thread.subject %}
       <b>{{ thread.subject }}</b>
-      <br/>
     {% endif %}
-    <b>{% firstof post.name 'Anonymous' %}</b> {{ post.time }} No.{{ post.id }}
-    <br/>
-    <div>
-      <img src="{{ post.image.url }}" style="max-height: 256px; max-width: 256px; margin-right: 8px" align="left"/>
-      <p>{{ post.comment }}</p>
-    </div>
-    <BR clear="left">
-    <hr>
-    <a href="{{ thread.get_absolute_url }}">{{ thread.post_set.all|length|add:"-1" }} repl{{ thread.post_set.all|length|add:"-1"|pluralize:"y,ies" }}</a>
+    <p>{{ post.comment }}</>
   </div>
 </div>
 

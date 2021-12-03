@@ -47,7 +47,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'board',
     'storages',
+    'sorl.thumbnail',
 ]
+
 if os.getenv('DJANGO_DEBUG') == 'True':
     INSTALLED_APPS += ['django.contrib.admin']
 

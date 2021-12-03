@@ -2,7 +2,8 @@
 
 {% block content %}
   {% if thread %}
-    <h1>Detail</h1>
+    <h1></h1>
+    <!-- <h1>Thread {{thread.id}}</h1> -->
     {% for post in thread.post_set.all %}
       {% include 'board/card.html' with thread=thread post=post %}
     {% endfor %}

@@ -5,10 +5,13 @@
 {% block content %}
   <h1>Catalog</h1>
   {% if thread_list %}
-    {% for thread in thread_list %}
-      {% include 'board/card_catalog.html' with thread=thread post=thread.post_set.first %}
-      <hr/>
-    {% endfor %}
+    <div class='row'>
+      {% for thread in thread_list %}
+        <div class='col-md-2 mb-4'>
+          {% include 'board/card_catalog.html' with thread=thread post=thread.post_set.first %}
+        </div>
+      {% endfor %}
+    </div>
   {% else %}
     <p>There are no threads.</p>
   {% endif %}

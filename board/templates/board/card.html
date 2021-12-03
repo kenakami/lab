@@ -1,3 +1,4 @@
+{% load thumbnail %}
 <div class='card'>
   <div class='card-body'>
     {% if post.original and thread.subject %} 
@@ -6,9 +7,14 @@
     {% endif %}
     <b>{% firstof post.name 'Anonymous' %}</b> {{ post.time }} No.{{ post.id }}
     <br/>
-    {% if post.image %}
-      <img src="{{ post.image.url }}" style="max-height: 256px; max-width: 256px; margin-right: 8px" align="left"/>
-    {% endif %}
+      {% if post.image %}
+        {% thumbnail post.image "128x128" as im %}
+        <a href="{{ post.image.url }}" target="_blank" rel="noopener noreferrer">
+          <img src="{{ im.url }}" style="margin-right: 8px" align="left"/>
+        </a>
+        {% endthumbnail %}
+      <!-- <img src="{{ post.image.url }}" style="max-height: 256px; max-width: 256px; margin-right: 8px" align="left"/> -->
+      {% endif %}
     {{ post.comment }}
   </div>
 </div>
