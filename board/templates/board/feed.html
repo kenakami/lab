@@ -8,7 +8,7 @@
     {% for thread in thread_list %}
       {% include 'board/card_feed.html' with thread=thread post=thread.post_set.first %}
       <ul>
-      {% if thread.post_set.all|length > 3 %}
+      {% if thread.post_set.all|length > 4 %}
         <div class='card'>
           <div class='card-body'>...</div>
         </div>

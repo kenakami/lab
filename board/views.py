@@ -10,7 +10,7 @@ import os
 def index(request):
     s3 = boto3.resource('s3')
     bucket = s3.Bucket(os.getenv('AWS_STORAGE_BUCKET_NAME'))
-    num_images = sum(1 for _ in bucket.objects.filter(Prefix='media/'))
+    num_images = sum(1 for _ in bucket.objects.filter(Prefix='media/', Delimiter='/'))
 
     context = {
         'num_threads': Thread.objects.count(),
