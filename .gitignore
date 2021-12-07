@@ -3,3 +3,4 @@ env
 *.pyc
 **/__pycache__
 /board/admin.py
+*.sqlite3
