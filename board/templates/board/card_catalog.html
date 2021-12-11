@@ -1,13 +1,13 @@
 {% load thumbnail %}
-<div class='card' style='max-height: 24em; overflow: hidden'>
+<div class='card' style='overflow: hidden'>
   {% if post.image %}
     {% thumbnail post.image "256x256" as im %}
     <a href="{{ thread.get_absolute_url }}">
-      <img class="card-img-top" src="{{ im.url }}"/>
+      <img class="card-img-top" src="{{ im.url }}" style="object-fit: contain; max-height: 12em"/>
     </a>
     {% endthumbnail %}
   {% endif %}
-  <div class='card-body'>
+  <div class='card-body' style='max-height: 12em'>
     <p>{{ thread.post_set.all|length|add:"-1" }} repl{{ thread.post_set.all|length|add:"-1"|pluralize:"y,ies" }}</p>
     {% if thread.subject %}
       <b>{{ thread.subject }}</b>

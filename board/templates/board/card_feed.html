@@ -5,7 +5,7 @@
       <b>{{ thread.subject }}</b>
       <br/>
     {% endif %}
-    <b>{% firstof post.name 'Anonymous' %}</b> {{ post.time }} No.{{ post.id }}
+    <b>{% firstof post.name 'Anonymous' %}</b> {{ post.time | date:"Y-m-d H:i:s T"}} No.{{ post.id }}
     <br/>
     <div>
       {% if post.image %}
