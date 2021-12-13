@@ -2,5 +2,5 @@
 
 Location-based Anonymous Board
 
-This should have location and images, but it's a simple text board for now.\
+The posts should have a location field, but it's a simple image board for now.\
 Visit the site at <https://board.kenakami.xyz>
